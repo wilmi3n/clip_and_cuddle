@@ -479,7 +479,8 @@
     );
   }
 async function adminLogin() {
-  const email = document.getElementById("adminEmail").value;
+  const 
+    email = document.getElementById("adminEmail").value;
   const password = document.getElementById("adminPassword").value;
 
   const { error } = await supabaseClient.auth.signInWithPassword({
@@ -495,14 +496,14 @@ async function adminLogin() {
   document.getElementById("adminMessage").textContent = "Login successful! 🧸";
 }
 </script
-<script>
+  <script>
 const SUPABASE_URL = 'https://jkojgbtttjbtxvadthvs.supabase.co';
 const SUPABASE_ANON_KEY = 'sb_publishable_shOMf-Ptj713NopsigcC5A_xNB5Ibsc';
-
 const supabaseClient = window.supabase.createClient(
   SUPABASE_URL,
   SUPABASE_ANON_KEY
 );
 </script>
+
 </body>
 </html>
