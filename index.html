@@ -367,7 +367,12 @@ footer {
   <div>Shipping: R<span id="cartShipping">0</span></div>
   <strong>Total: R<span id="cartTotal">0</span></strong>
 </div>
+<label><strong>Delivery option:</strong></label>
 
+<select id="delivery" class="custom-name" onchange="updateCart()">
+  <option>Nationwide Shipping</option>
+  <option>Local Pickup - George</option>
+</select>
 <script>   
 
 const SUPABASE_URL = 'https://jkojgbtttjbtxvadthvs.supabase.co';
