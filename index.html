@@ -675,7 +675,6 @@ function addProductToCart(
   alert('Added to your cart! 🧸');
 }
 
-
 function updateCart() {
 
   const cartItems =
@@ -683,11 +682,11 @@ function updateCart() {
 
   cartItems.innerHTML = '';
 
-  let total = 0;
+  let subtotal = 0;
 
   cart.forEach((item, index) => {
 
-    total += Number(item.price);
+    subtotal += Number(item.price);
 
     const div =
       document.createElement('div');
@@ -717,12 +716,29 @@ function updateCart() {
 
   });
 
+  const delivery =
+    document.getElementById('delivery').value;
+
+  const shipping =
+    delivery === 'Nationwide Shipping' && cart.length > 0
+      ? 120
+      : 0;
+
+  const total = subtotal + shipping;
+
+  document.getElementById('cartSubtotal').textContent =
+    subtotal;
+
+  document.getElementById('cartShipping').textContent =
+    shipping;
+
   document.getElementById('cartTotal').textContent =
     total;
 
   document.getElementById('cartCount').textContent =
     cart.length;
 }
+
 
 
 function removeItem(index) {
