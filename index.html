@@ -362,9 +362,13 @@ footer {
 
     <div id="cartItems"></div>
 
-    <div class="cart-total">
-      Total: R<span id="cartTotal">0</span>
- <script>
+ <div class="cart-total">
+  <div>Subtotal: R<span id="cartSubtotal">0</span></div>
+  <div>Shipping: R<span id="cartShipping">0</span></div>
+  <strong>Total: R<span id="cartTotal">0</span></strong>
+</div>
+
+<script>   
 
 const SUPABASE_URL = 'https://jkojgbtttjbtxvadthvs.supabase.co';
 const SUPABASE_ANON_KEY = 'sb_publishable_shOMf-Ptj713NopsigcC5A_xNB5Ibsc';
