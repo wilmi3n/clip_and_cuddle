@@ -1,259 +1,239 @@
 <!DOCTYPE html>
 <html lang="en">
-<script src="https://cdn.jsdelivr.net/npm/@superbase/superbase-js@2"></script>
-</head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Clip & Cuddle 🧸</title>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Clip & Cuddle 🧸</title>
 
-  <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-      font-family: Arial, sans-serif;
-    }
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
-    body {
-      background: #fdf5f1;
-      color: #5f4540;
-    }
+<style>
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+}
 
-    header {
-      background: #f4d8d8;
-      padding: 25px 20px;
-      text-align: center;
-      border-bottom: 2px solid #e8c5c5;
-    }
+body {
+  background: #fdf5f1;
+  color: #5f4540;
+}
 
-    .logo {
-      max-width: 180px;
-      margin-bottom: 10px;
-    }
+header {
+  background: #f4d8d8;
+  padding: 25px 20px;
+  text-align: center;
+}
 
-    .brand-name {
-      font-size: 32px;
-      font-weight: bold;
-      color: #9b6666;
-    }
+.brand-name {
+  font-size: 32px;
+  font-weight: bold;
+  color: #9b6666;
+}
 
-    .tagline {
-      margin-top: 6px;
-      color: #80625c;
-    }
+.tagline {
+  margin-top: 6px;
+  color: #80625c;
+}
 
-    nav {
-      background: #ead5c5;
-      padding: 12px;
-      text-align: center;
-      position: sticky;
-      top: 0;
-      z-index: 10;
-    }
+nav {
+  background: #ead5c5;
+  padding: 12px;
+  text-align: center;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
 
-    nav a {
-      color: #684c47;
-      text-decoration: none;
-      margin: 0 12px;
-      font-weight: bold;
-    }
+nav a {
+  color: #684c47;
+  text-decoration: none;
+  margin: 0 8px;
+  font-weight: bold;
+}
 
-    .cart-button {
-      background: #b98282;
-      color: white;
-      border: none;
-      padding: 9px 15px;
-      border-radius: 20px;
-      cursor: pointer;
-    }
+.cart-button,
+.add-button,
+.checkout {
+  background: #b98282;
+  color: white;
+  border: none;
+  padding: 11px 15px;
+  border-radius: 12px;
+  cursor: pointer;
+  font-weight: bold;
+}
 
-    .hero {
-      text-align: center;
-      padding: 55px 20px;
-    }
+.hero {
+  text-align: center;
+  padding: 55px 20px;
+}
 
-    .hero h1 {
-      font-size: 38px;
-      color: #9b6666;
-      margin-bottom: 12px;
-    }
+.hero h1 {
+  font-size: 38px;
+  color: #9b6666;
+  margin-bottom: 12px;
+}
 
-    .hero p {
-      font-size: 18px;
-      max-width: 600px;
-      margin: auto;
-      line-height: 1.6;
-    }
+.hero p {
+  font-size: 18px;
+  max-width: 600px;
+  margin: auto;
+  line-height: 1.6;
+}
 
-    .section {
-      padding: 35px 20px;
-      max-width: 1100px;
-      margin: auto;
-    }
+.section {
+  padding: 35px 20px;
+  max-width: 1100px;
+  margin: auto;
+}
 
-    .section h2 {
-      text-align: center;
-      color: #9b6666;
-      margin-bottom: 25px;
-      font-size: 28px;
-    }
+.section h2 {
+  text-align: center;
+  color: #9b6666;
+  margin-bottom: 25px;
+}
 
-    .products {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
-      gap: 22px;
-    }
+.products {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: 22px;
+}
 
-    .product {
-      background: #fffaf7;
-      border: 1px solid #ead5c5;
-      border-radius: 18px;
-      padding: 18px;
-      text-align: center;
-      box-shadow: 0 4px 12px rgba(100,70,60,0.08);
-    }
+.product {
+  background: #fffaf7;
+  border: 1px solid #ead5c5;
+  border-radius: 18px;
+  padding: 18px;
+  text-align: center;
+}
 
-    .product-image {
-      height: 190px;
-      background: #eadbd0;
-      border-radius: 14px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin-bottom: 15px;
-      color: #80625c;
-    }
+.product-image {
+  width: 100%;
+  height: 190px;
+  object-fit: cover;
+  border-radius: 14px;
+  margin-bottom: 15px;
+}
 
-    .product h3 {
-      color: #79534e;
-      margin-bottom: 8px;
-    }
+.product h3 {
+  color: #79534e;
+  margin-bottom: 8px;
+}
 
-    .price {
-      font-weight: bold;
-      font-size: 19px;
-      margin-bottom: 12px;
-      color: #9b6666;
-    }
+.price {
+  font-weight: bold;
+  font-size: 19px;
+  margin-bottom: 12px;
+  color: #9b6666;
+}
 
-    .custom-name {
-      width: 100%;
-      padding: 10px;
-      border: 1px solid #d8bdb2;
-      border-radius: 10px;
-      margin-bottom: 10px;
-      background: white;
-    }
+.custom-name {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #d8bdb2;
+  border-radius: 10px;
+  margin-bottom: 10px;
+  background: white;
+}
 
-    .add-button {
-      width: 100%;
-      background: #b98282;
-      color: white;
-      border: none;
-      padding: 11px;
-      border-radius: 12px;
-      cursor: pointer;
-      font-weight: bold;
-    }
+.add-button {
+  width: 100%;
+}
 
-    .add-button:hover {
-      background: #9f6868;
-    }
+.shipping,
+.admin-box {
+  background: #ead5c5;
+  border-radius: 18px;
+  padding: 25px;
+  line-height: 1.8;
+}
 
-    .shipping {
-      background: #ead5c5;
-      border-radius: 18px;
-      padding: 25px;
-      line-height: 1.8;
-    }
+.admin-box input {
+  display: block;
+  margin-bottom: 10px;
+}
 
-    footer {
-      background: #f0d1d1;
-      text-align: center;
-      padding: 25px;
-      margin-top: 30px;
-    }
+#adminPanel {
+  display: none;
+}
 
-    #cart {
-      display: none;
-      position: fixed;
-      inset: 0;
-      background: rgba(60,40,35,0.45);
-      z-index: 100;
-    }
+.admin-product {
+  margin-top: 20px;
+  padding-top: 20px;
+  border-top: 1px solid #d8bdb2;
+}
 
-    .cart-box {
-      background: #fffaf7;
-      width: 90%;
-      max-width: 500px;
-      max-height: 90vh;
-      overflow-y: auto;
-      margin: 5vh auto;
-      padding: 25px;
-      border-radius: 20px;
-    }
+footer {
+  background: #f0d1d1;
+  text-align: center;
+  padding: 25px;
+  margin-top: 30px;
+}
 
-    .cart-box h2 {
-      color: #9b6666;
-      margin-bottom: 20px;
-    }
+#cart {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(60,40,35,0.45);
+  z-index: 100;
+}
 
-    .cart-item {
-      border-bottom: 1px solid #ead5c5;
-      padding: 12px 0;
-    }
+.cart-box {
+  background: #fffaf7;
+  width: 90%;
+  max-width: 500px;
+  max-height: 90vh;
+  overflow-y: auto;
+  margin: 5vh auto;
+  padding: 25px;
+  border-radius: 20px;
+}
 
-    .remove {
-      background: none;
-      border: none;
-      color: #a55b5b;
-      cursor: pointer;
-      margin-top: 5px;
-    }
+.cart-item {
+  border-bottom: 1px solid #ead5c5;
+  padding: 12px 0;
+}
 
-    .cart-total {
-      font-size: 20px;
-      font-weight: bold;
-      margin: 20px 0;
-    }
+.remove {
+  background: none;
+  border: none;
+  color: #a55b5b;
+  cursor: pointer;
+  margin-top: 5px;
+}
 
-    .checkout {
-      width: 100%;
-      padding: 13px;
-      border: none;
-      border-radius: 12px;
-      background: #9b6666;
-      color: white;
-      font-size: 16px;
-      font-weight: bold;
-      cursor: pointer;
-    }
+.cart-total {
+  font-size: 20px;
+  font-weight: bold;
+  margin: 20px 0;
+}
 
-    .close {
-      float: right;
-      border: none;
-      background: none;
-      font-size: 22px;
-      cursor: pointer;
-    }
+.close {
+  float: right;
+  border: none;
+  background: none;
+  font-size: 22px;
+  cursor: pointer;
+}
 
-    @media (max-width: 600px) {
-      .hero h1 {
-        font-size: 30px;
-      }
+@media(max-width:600px) {
+  .hero h1 {
+    font-size: 30px;
+  }
 
-      nav a {
-        margin: 0 5px;
-        font-size: 14px;
-      }
-    }
-  </style>
+  nav a {
+    margin: 0 4px;
+    font-size: 13px;
+  }
+}
+</style>
 </head>
 
 <body>
 
 <header>
-  <!-- Your logo will go here later -->
   <div class="brand-name">Clip & Cuddle 🧸</div>
   <div class="tagline">Handmade with love for your little ones ♡</div>
 </header>
@@ -272,79 +252,105 @@
   <h1>Welcome to Clip & Cuddle 🧸</h1>
   <p>
     Beautiful handmade dummy clips made with love.
-    Create a special clip for your little one, including personalised
-    baby-name clips.
+    Create a special clip for your little one.
   </p>
 </section>
 
 <section class="section" id="shop">
   <h2>Our Dummy Clips 🎀</h2>
-
-  <div class="products">
-
-    <div class="product">
-      <div class="product-image">Your product photo</div>
-      <h3>Classic Dummy Clip</h3>
-      <div class="price">R75</div>
-
-      <button class="add-button"
-        onclick="addToCart('Classic Dummy Clip',75,'')">
-        Add to Cart
-      </button>
-    </div>
-
-    <div class="product">
-      <div class="product-image">Your product photo</div>
-      <h3>Custom Name Clip</h3>
-      <div class="price">R85</div>
-
-      <input
-        class="custom-name"
-        id="babyName"
-        type="text"
-        placeholder="Enter baby's name">
-
-      <button class="add-button"
-        onclick="addCustomClip()">
-        Add Custom Clip
-      </button>
-    </div>
-
+  <div class="products" id="productList">
+    <p>Loading products...</p>
   </div>
 </section>
 
 <section class="section" id="shipping">
   <h2>Delivery & Pickup 🚚</h2>
-
   <div class="shipping">
     <p><strong>🇿🇦 Nationwide Shipping</strong></p>
-    <p>We ship Clip & Cuddle orders nationwide across South Africa.</p>
-
+    <p>We ship Clip & Cuddle orders across South Africa.</p>
     <br>
-
     <p><strong>📍 Local Pickup – George</strong></p>
-    <p>Local customers can choose pickup in George at checkout.</p>
+    <p>Local customers can choose pickup in George.</p>
+  </div>
+</section>
+
+<section class="section" id="admin">
+  <h2>Admin 🧸</h2>
+
+  <div class="admin-box" id="loginBox">
+    <h3>Admin Login</h3>
+
+    <input
+      id="adminEmail"
+      class="custom-name"
+      type="email"
+      placeholder="Admin email"
+    >
+
+    <input
+      id="adminPassword"
+      class="custom-name"
+      type="password"
+      placeholder="Password"
+    >
+
+    <button class="add-button" onclick="adminLogin()">
+      Login
+    </button>
+
+    <p id="adminMessage"></p>
+  </div>
+
+  <div class="admin-box" id="adminPanel">
+
+    <h3>Add New Dummy Clip 🧸</h3>
+
+    <input
+      id="productName"
+      class="custom-name"
+      type="text"
+      placeholder="Product name"
+    >
+
+    <input
+      id="productPrice"
+      class="custom-name"
+      type="number"
+      placeholder="Price in R"
+    >
+
+    <input
+      id="productDescription"
+      class="custom-name"
+      type="text"
+      placeholder="Description"
+    >
+
+    <label>
+      <input id="productCustomName" type="checkbox">
+      Custom baby name
+    </label>
+
+    <br><br>
+
+    <input id="productImage" type="file" accept="image/*">
+
+    <br><br>
+
+    <button class="add-button" onclick="addProduct()">
+      Add Product
+    </button>
+
+    <p id="productMessage"></p>
+
+    <div id="adminProducts"></div>
+
   </div>
 </section>
 
 <footer>
   <p>© 2026 Clip & Cuddle 🧸</p>
   <p>Handmade with love ♡</p>
-  <section class="section" id="admin">
-  <h2>Admin 🧸</h2>
-
-  <div class="shipping">
-    <h3>Admin Login</h3>
-
-    <input id="adminEmail" class="custom-name" type="email" placeholder="Admin email">
-
-    <input id="adminPassword" class="custom-name" type="password" placeholder="Password">
-
-    <button class="add-button" onclick="adminLogin()">Login</button>
-
-    <p id="adminMessage"></p>
-  </div>
-</section>
 </footer>
 
 <div id="cart">
@@ -358,17 +364,418 @@
 
     <div class="cart-total">
       Total: R<span id="cartTotal">0</span>
-    </div>
+ <script>
+
+const SUPABASE_URL = 'https://jkojgbtttjbtxvadthvs.supabase.co';
+const SUPABASE_ANON_KEY = 'sb_publishable_shOMf-Ptj713NopsigcC5A_xNB5Ibsc';
+
+const supabaseClient = window.supabase.createClient(
+  SUPABASE_URL,
+  SUPABASE_ANON_KEY
+);
+
+let cart = [];
+
+async function loadProducts() {
+
+  const { data, error } = await supabaseClient
+    .from('products')
+    .select('*')
+    .order('id', { ascending: false });
+
+  if (error) {
+    document.getElementById('productList').innerHTML =
+      '<p>Could not load products.</p>';
+    return;
+  }
+
+  const productList = document.getElementById('productList');
+
+  productList.innerHTML = '';
+
+  if (!data || data.length === 0) {
+    productList.innerHTML =
+      '<p>No products available yet.</p>';
+    return;
+  }
+
+  data.forEach(product => {
+
+    const card = document.createElement('div');
+    card.className = 'product';
+
+    let customInput = '';
+
+    if (product.custom_name) {
+      customInput = `
+        <input
+          class="custom-name"
+          id="name-${product.id}"
+          type="text"
+          placeholder="Enter baby's name"
+        >
+      `;
+    }
+
+    card.innerHTML = `
+      <img
+        class="product-image"
+        src="${product.image_url}"
+        alt="${product.name}"
+      >
+
+      <h3>${product.name}</h3>
+
+      <p>${product.description || ''}</p>
+
+      <div class="price">
+        R${product.price}
+      </div>
+
+      ${customInput}
+
+      <button
+        class="add-button"
+        onclick="addProductToCart(${product.id}, '${product.name.replace(/'/g, "\\'")}', ${product.price}, ${product.custom_name})"
+      >
+        Add to Cart
+      </button>
+    `;
+
+    productList.appendChild(card);
+
+  });
+}
+
+
+async function adminLogin() {
+
+  const email =
+    document.getElementById('adminEmail').value;
+
+  const password =
+    document.getElementById('adminPassword').value;
+
+  const { data, error } =
+    await supabaseClient.auth.signInWithPassword({
+      email: email,
+      password: password
+    });
+
+  if (error) {
+
+    document.getElementById('adminMessage').textContent =
+      error.message;
+
+    return;
+  }
+
+  document.getElementById('adminMessage').textContent =
+    'Login successful! 🧸';
+
+  document.getElementById('loginBox').style.display =
+    'none';
+
+  document.getElementById('adminPanel').style.display =
+    'block';
+
+  loadAdminProducts();
+}
+
+
+async function addProduct() {
+
+  const name =
+    document.getElementById('productName').value.trim();
+
+  const price =
+    Number(document.getElementById('productPrice').value);
+
+  const description =
+    document.getElementById('productDescription').value.trim();
+
+  const customName =
+    document.getElementById('productCustomName').checked;
+
+  const imageFile =
+    document.getElementById('productImage').files[0];
+
+  if (!name || !price || !imageFile) {
+
+    document.getElementById('productMessage').textContent =
+      'Please enter a name, price and photo.';
+
+    return;
+  }
+
+  document.getElementById('productMessage').textContent =
+    'Uploading product...';
+
+  const fileName =
+    Date.now() + '-' + imageFile.name;
+
+  const { error: uploadError } =
+    await supabaseClient
+      .storage
+      .from('product-images')
+      .upload(fileName, imageFile);
+
+  if (uploadError) {
+
+    document.getElementById('productMessage').textContent =
+      uploadError.message;
+
+    return;
+  }
+
+  const { data: publicData } =
+    supabaseClient
+      .storage
+      .from('product-images')
+      .getPublicUrl(fileName);
+
+  const imageUrl =
+    publicData.publicUrl;
+
+  const { error: insertError } =
+    await supabaseClient
+      .from('products')
+      .insert({
+        name: name,
+        price: price,
+        description: description,
+        image_url: imageUrl,
+        custom_name: customName
+      });
+
+  if (insertError) {
+
+    document.getElementById('productMessage').textContent =
+      insertError.message;
+
+    return;
+  }
+
+  document.getElementById('productMessage').textContent =
+    'Product added successfully! 🧸';
+
+  document.getElementById('productName').value = '';
+  document.getElementById('productPrice').value = '';
+  document.getElementById('productDescription').value = '';
+  document.getElementById('productCustomName').checked = false;
+  document.getElementById('productImage').value = '';
+
+  loadProducts();
+  loadAdminProducts();
+}
+
+
+async function loadAdminProducts() {
+
+  const { data, error } =
+    await supabaseClient
+      .from('products')
+      .select('*')
+      .order('id', { ascending: false });
+
+  if (error) return;
+
+  const container =
+    document.getElementById('adminProducts');
+
+  container.innerHTML =
+    '<h3>Current Products</h3>';
+
+  data.forEach(product => {
+
+    const div =
+      document.createElement('div');
+
+    div.className = 'admin-product';
+
+    div.innerHTML = `
+      <strong>${product.name}</strong>
+      <br>
+      R${product.price}
+      <br><br>
+
+      <button
+        class="remove"
+        onclick="deleteProduct(${product.id})"
+      >
+        Delete
+      </button>
+    `;
+
+    container.appendChild(div);
+
+  });
+}
+
+
+async function deleteProduct(id) {
+
+  if (!confirm('Delete this product?')) return;
+
+  const { error } =
+    await supabaseClient
+      .from('products')
+      .delete()
+      .eq('id', id);
+
+  if (error) {
+
+    alert(error.message);
+
+    return;
+  }
+
+  loadProducts();
+  loadAdminProducts();
+}
+
+
+function addProductToCart(
+  id,
+  name,
+  price,
+  requiresName
+) {
+
+  let customName = '';
+
+  if (requiresName) {
+
+    const input =
+      document.getElementById('name-' + id);
+
+    customName =
+      input.value.trim();
+
+    if (!customName) {
+
+      alert("Please enter the baby's name.");
+
+      return;
+    }
+  }
+
+  cart.push({
+    name: name,
+    price: price,
+    customName: customName
+  });
+
+  updateCart();
+
+  alert('Added to your cart! 🧸');
+}
+
+
+function updateCart() {
+
+  const cartItems =
+    document.getElementById('cartItems');
+
+  cartItems.innerHTML = '';
+
+  let total = 0;
+
+  cart.forEach((item, index) => {
+
+    total += Number(item.price);
+
+    const div =
+      document.createElement('div');
+
+    div.className = 'cart-item';
+
+    div.innerHTML = `
+      <strong>${item.name}</strong><br>
+
+      ${item.customName
+        ? 'Baby name: ' + item.customName + '<br>'
+        : ''}
+
+      R${item.price}
+
+      <br>
+
+      <button
+        class="remove"
+        onclick="removeItem(${index})"
+      >
+        Remove
+      </button>
+    `;
+
+    cartItems.appendChild(div);
+
+  });
+
+  document.getElementById('cartTotal').textContent =
+    total;
+
+  document.getElementById('cartCount').textContent =
+    cart.length;
+}
+
+
+function removeItem(index) {
+
+  cart.splice(index, 1);
+
+  updateCart();
+}
+
+
+function openCart() {
+
+  document.getElementById('cart').style.display =
+    'block';
+
+  updateCart();
+}
+
+
+function closeCart() {
+
+  document.getElementById('cart').style.display =
+    'none';
+}
+
+
+function checkout() {
+
+  if (cart.length === 0) {
+
+    alert('Your cart is empty.');
+
+    return;
+  }
+
+  const delivery =
+    document.getElementById('delivery').value;
+
+  alert(
+    'Checkout will be connected to secure online payment soon! 🧸\n\n' +
+    'Delivery: ' + delivery
+  );
+}
+
+
+loadProducts();
+
+</script>
+
+</body>
+</html>  </div>
 
     <label><strong>Delivery option:</strong></label>
 
     <select id="delivery" class="custom-name">
-      <option value="Nationwide Shipping">
-        Nationwide Shipping
-      </option>
-      <option value="Local Pickup - George">
-        Local Pickup - George
-      </option>
+      <option>Nationwide Shipping</option>
+      <option>Local Pickup - George</option>
     </select>
 
     <button class="checkout" onclick="checkout()">
@@ -377,127 +784,3 @@
 
   </div>
 </div>
-
-<script>
-
-  let cart = [];
-
-  function addToCart(name, price, customName) {
-    cart.push({
-      name: name,
-      price: price,
-      customName: customName
-    });
-
-    updateCart();
-    alert("Added to your cart! 🧸");
-  }
-
-  function addCustomClip() {
-
-    const name = document.getElementById("babyName").value.trim();
-
-    if (name === "") {
-      alert("Please enter the baby's name.");
-      return;
-    }
-
-    addToCart(
-      "Custom Name Clip",
-      85,
-      name
-    );
-
-    document.getElementById("babyName").value = "";
-  }
-
-  function updateCart() {
-
-    const cartItems = document.getElementById("cartItems");
-
-    cartItems.innerHTML = "";
-
-    let total = 0;
-
-    cart.forEach((item, index) => {
-
-      total += item.price;
-
-      const div = document.createElement("div");
-
-      div.className = "cart-item";
-
-      div.innerHTML = `
-        <strong>${item.name}</strong><br>
-        ${item.customName ? "Baby name: " + item.customName + "<br>" : ""}
-        R${item.price}
-        <br>
-        <button class="remove" onclick="removeItem(${index})">
-          Remove
-        </button>
-      `;
-
-      cartItems.appendChild(div);
-    });
-
-    document.getElementById("cartTotal").textContent = total;
-    document.getElementById("cartCount").textContent = cart.length;
-  }
-
-  function removeItem(index) {
-
-    cart.splice(index, 1);
-
-    updateCart();
-  }
-
-  function openCart() {
-
-    document.getElementById("cart").style.display = "block";
-
-    updateCart();
-  }
-
-  function closeCart() {
-
-    document.getElementById("cart").style.display = "none";
-  }
-
-  function checkout() {
-
-    if (cart.length === 0) {
-      alert("Your cart is empty.");
-      return;
-    }
-
-    const delivery =
-      document.getElementById("delivery").value;
-
-    alert(
-      "Checkout will be connected to secure online payment soon! 🧸\n\n" +
-      "Delivery: " + delivery
-    );
-  }
-async function adminLogin() {
-  const 
-    email = document.getElementById("adminEmail").value;
-  const password = document.getElementById("adminPassword").value;
-
-  const { error } = await supabaseClient.auth.signInWithPassword({
-    email: email,
-    password: password
-  });
-
-  if (error) {
-    document.getElementById("adminMessage").textContent = "Login failed. Please check your details.";
-    return;
-  }
-
-  document.getElementById("adminMessage").textContent = "Login successful! 🧸";
-}
-</script>
-  
-<script>
-
-</body>
-</html>
