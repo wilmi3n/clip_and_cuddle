@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
+<script src="https://cdn.jsdelivr.net/npm/@superbase/superbase-js@2"></script>
+</head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Clip & Cuddle 🧸</title>
@@ -462,7 +463,15 @@
     );
   }
 
-</script>
+</script
+<script>
+const SUPABASE_URL = 'https://jkojgbtttjbtxvadthvs.supabase.co';
+const SUPABASE_ANON_KEY = 'sb_publishable_shOMf-Ptj713NopsigcC5A_xNB5Ibsc';
 
+const supabaseClient = window.supabase.createClient(
+  SUPABASE_URL,
+  SUPABASE_ANON_KEY
+);
+</script>
 </body>
 </html>
