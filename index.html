@@ -745,22 +745,56 @@ function closeCart() {
 }
 
 
-function checkout() {
-
+async function checkout() {
   if (cart.length === 0) {
-
     alert('Your cart is empty.');
-
     return;
   }
 
-  const delivery =
-    document.getElementById('delivery').value;
+  const name = prompt('What is your full name?');
+  if (!name) return;
+
+  const phone = prompt('What is your phone number?');
+  if (!phone) return;
+
+  const email = prompt('What is your email address?');
+
+  const delivery = document.getElementById('delivery').value;
+
+  let address = '';
+
+  if (delivery === 'Nationwide Shipping') {
+    address = prompt('Please enter your delivery address:');
+    if (!address) return;
+  }
+
+  const total = cart.reduce((sum, item) => sum + Number(item.price), 0);
+
+  const { error } = await supabaseClient
+    .from('orders')
+    .insert({
+      customer_name: name,
+      phone: phone,
+      email: email || null,
+      address: address || null,
+      delivery_option: delivery,
+      items: cart,
+      total: total
+    });
+
+  if (error) {
+    alert('There was a problem placing your order:\n\n' + error.message);
+    return;
+  }
 
   alert(
-    'Checkout will be connected to secure online payment soon! 🧸\n\n' +
-    'Delivery: ' + delivery
+    'Order placed successfully! 🧸💕\n\n' +
+    'Thank you for ordering from Clip & Cuddle!'
   );
+
+  cart = [];
+  updateCart();
+  closeCart();
 }
 
 
