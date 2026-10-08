@@ -1,1 +1,468 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Clip & Cuddle 🧸</title>
 
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+    }
+
+    body {
+      background: #fdf5f1;
+      color: #5f4540;
+    }
+
+    header {
+      background: #f4d8d8;
+      padding: 25px 20px;
+      text-align: center;
+      border-bottom: 2px solid #e8c5c5;
+    }
+
+    .logo {
+      max-width: 180px;
+      margin-bottom: 10px;
+    }
+
+    .brand-name {
+      font-size: 32px;
+      font-weight: bold;
+      color: #9b6666;
+    }
+
+    .tagline {
+      margin-top: 6px;
+      color: #80625c;
+    }
+
+    nav {
+      background: #ead5c5;
+      padding: 12px;
+      text-align: center;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+
+    nav a {
+      color: #684c47;
+      text-decoration: none;
+      margin: 0 12px;
+      font-weight: bold;
+    }
+
+    .cart-button {
+      background: #b98282;
+      color: white;
+      border: none;
+      padding: 9px 15px;
+      border-radius: 20px;
+      cursor: pointer;
+    }
+
+    .hero {
+      text-align: center;
+      padding: 55px 20px;
+    }
+
+    .hero h1 {
+      font-size: 38px;
+      color: #9b6666;
+      margin-bottom: 12px;
+    }
+
+    .hero p {
+      font-size: 18px;
+      max-width: 600px;
+      margin: auto;
+      line-height: 1.6;
+    }
+
+    .section {
+      padding: 35px 20px;
+      max-width: 1100px;
+      margin: auto;
+    }
+
+    .section h2 {
+      text-align: center;
+      color: #9b6666;
+      margin-bottom: 25px;
+      font-size: 28px;
+    }
+
+    .products {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+      gap: 22px;
+    }
+
+    .product {
+      background: #fffaf7;
+      border: 1px solid #ead5c5;
+      border-radius: 18px;
+      padding: 18px;
+      text-align: center;
+      box-shadow: 0 4px 12px rgba(100,70,60,0.08);
+    }
+
+    .product-image {
+      height: 190px;
+      background: #eadbd0;
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 15px;
+      color: #80625c;
+    }
+
+    .product h3 {
+      color: #79534e;
+      margin-bottom: 8px;
+    }
+
+    .price {
+      font-weight: bold;
+      font-size: 19px;
+      margin-bottom: 12px;
+      color: #9b6666;
+    }
+
+    .custom-name {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #d8bdb2;
+      border-radius: 10px;
+      margin-bottom: 10px;
+      background: white;
+    }
+
+    .add-button {
+      width: 100%;
+      background: #b98282;
+      color: white;
+      border: none;
+      padding: 11px;
+      border-radius: 12px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    .add-button:hover {
+      background: #9f6868;
+    }
+
+    .shipping {
+      background: #ead5c5;
+      border-radius: 18px;
+      padding: 25px;
+      line-height: 1.8;
+    }
+
+    footer {
+      background: #f0d1d1;
+      text-align: center;
+      padding: 25px;
+      margin-top: 30px;
+    }
+
+    #cart {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(60,40,35,0.45);
+      z-index: 100;
+    }
+
+    .cart-box {
+      background: #fffaf7;
+      width: 90%;
+      max-width: 500px;
+      max-height: 90vh;
+      overflow-y: auto;
+      margin: 5vh auto;
+      padding: 25px;
+      border-radius: 20px;
+    }
+
+    .cart-box h2 {
+      color: #9b6666;
+      margin-bottom: 20px;
+    }
+
+    .cart-item {
+      border-bottom: 1px solid #ead5c5;
+      padding: 12px 0;
+    }
+
+    .remove {
+      background: none;
+      border: none;
+      color: #a55b5b;
+      cursor: pointer;
+      margin-top: 5px;
+    }
+
+    .cart-total {
+      font-size: 20px;
+      font-weight: bold;
+      margin: 20px 0;
+    }
+
+    .checkout {
+      width: 100%;
+      padding: 13px;
+      border: none;
+      border-radius: 12px;
+      background: #9b6666;
+      color: white;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .close {
+      float: right;
+      border: none;
+      background: none;
+      font-size: 22px;
+      cursor: pointer;
+    }
+
+    @media (max-width: 600px) {
+      .hero h1 {
+        font-size: 30px;
+      }
+
+      nav a {
+        margin: 0 5px;
+        font-size: 14px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <!-- Your logo will go here later -->
+  <div class="brand-name">Clip & Cuddle 🧸</div>
+  <div class="tagline">Handmade with love for your little ones ♡</div>
+</header>
+
+<nav>
+  <a href="#home">Home</a>
+  <a href="#shop">Shop</a>
+  <a href="#shipping">Shipping</a>
+  <button class="cart-button" onclick="openCart()">
+    🛒 Cart (<span id="cartCount">0</span>)
+  </button>
+</nav>
+
+<section class="hero" id="home">
+  <h1>Welcome to Clip & Cuddle 🧸</h1>
+  <p>
+    Beautiful handmade dummy clips made with love.
+    Create a special clip for your little one, including personalised
+    baby-name clips.
+  </p>
+</section>
+
+<section class="section" id="shop">
+  <h2>Our Dummy Clips 🎀</h2>
+
+  <div class="products">
+
+    <div class="product">
+      <div class="product-image">Your product photo</div>
+      <h3>Classic Dummy Clip</h3>
+      <div class="price">R75</div>
+
+      <button class="add-button"
+        onclick="addToCart('Classic Dummy Clip',75,'')">
+        Add to Cart
+      </button>
+    </div>
+
+    <div class="product">
+      <div class="product-image">Your product photo</div>
+      <h3>Custom Name Clip</h3>
+      <div class="price">R85</div>
+
+      <input
+        class="custom-name"
+        id="babyName"
+        type="text"
+        placeholder="Enter baby's name">
+
+      <button class="add-button"
+        onclick="addCustomClip()">
+        Add Custom Clip
+      </button>
+    </div>
+
+  </div>
+</section>
+
+<section class="section" id="shipping">
+  <h2>Delivery & Pickup 🚚</h2>
+
+  <div class="shipping">
+    <p><strong>🇿🇦 Nationwide Shipping</strong></p>
+    <p>We ship Clip & Cuddle orders nationwide across South Africa.</p>
+
+    <br>
+
+    <p><strong>📍 Local Pickup – George</strong></p>
+    <p>Local customers can choose pickup in George at checkout.</p>
+  </div>
+</section>
+
+<footer>
+  <p>© 2026 Clip & Cuddle 🧸</p>
+  <p>Handmade with love ♡</p>
+</footer>
+
+<div id="cart">
+  <div class="cart-box">
+
+    <button class="close" onclick="closeCart()">✕</button>
+
+    <h2>Your Cart 🛒</h2>
+
+    <div id="cartItems"></div>
+
+    <div class="cart-total">
+      Total: R<span id="cartTotal">0</span>
+    </div>
+
+    <label><strong>Delivery option:</strong></label>
+
+    <select id="delivery" class="custom-name">
+      <option value="Nationwide Shipping">
+        Nationwide Shipping
+      </option>
+      <option value="Local Pickup - George">
+        Local Pickup - George
+      </option>
+    </select>
+
+    <button class="checkout" onclick="checkout()">
+      Continue to Checkout
+    </button>
+
+  </div>
+</div>
+
+<script>
+
+  let cart = [];
+
+  function addToCart(name, price, customName) {
+    cart.push({
+      name: name,
+      price: price,
+      customName: customName
+    });
+
+    updateCart();
+    alert("Added to your cart! 🧸");
+  }
+
+  function addCustomClip() {
+
+    const name = document.getElementById("babyName").value.trim();
+
+    if (name === "") {
+      alert("Please enter the baby's name.");
+      return;
+    }
+
+    addToCart(
+      "Custom Name Clip",
+      85,
+      name
+    );
+
+    document.getElementById("babyName").value = "";
+  }
+
+  function updateCart() {
+
+    const cartItems = document.getElementById("cartItems");
+
+    cartItems.innerHTML = "";
+
+    let total = 0;
+
+    cart.forEach((item, index) => {
+
+      total += item.price;
+
+      const div = document.createElement("div");
+
+      div.className = "cart-item";
+
+      div.innerHTML = `
+        <strong>${item.name}</strong><br>
+        ${item.customName ? "Baby name: " + item.customName + "<br>" : ""}
+        R${item.price}
+        <br>
+        <button class="remove" onclick="removeItem(${index})">
+          Remove
+        </button>
+      `;
+
+      cartItems.appendChild(div);
+    });
+
+    document.getElementById("cartTotal").textContent = total;
+    document.getElementById("cartCount").textContent = cart.length;
+  }
+
+  function removeItem(index) {
+
+    cart.splice(index, 1);
+
+    updateCart();
+  }
+
+  function openCart() {
+
+    document.getElementById("cart").style.display = "block";
+
+    updateCart();
+  }
+
+  function closeCart() {
+
+    document.getElementById("cart").style.display = "none";
+  }
+
+  function checkout() {
+
+    if (cart.length === 0) {
+      alert("Your cart is empty.");
+      return;
+    }
+
+    const delivery =
+      document.getElementById("delivery").value;
+
+    alert(
+      "Checkout will be connected to secure online payment soon! 🧸\n\n" +
+      "Delivery: " + delivery
+    );
+  }
+
+</script>
+
+</body>
+</html>
