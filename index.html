@@ -768,7 +768,11 @@ async function checkout() {
     if (!address) return;
   }
 
-  const total = cart.reduce((sum, item) => sum + Number(item.price), 0);
+  const subtotal = cart.reduce((sum, item) => sum + Number(item.price), 0);
+
+const shipping = delivery === 'Nationwide Shipping' ? 120 : 0;
+
+const total = subtotal + shipping;
 
   const { error } = await supabaseClient
     .from('orders')
